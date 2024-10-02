@@ -1,0 +1,11 @@
+table {
+  width: 100%;
+  height: 80vw;
+}
+
+table button {
+  all: unset;
+  font-size: xx-large;
+  font-family: monospace;
+  padding: ;
+}
