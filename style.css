@@ -18,7 +18,7 @@ table button {
   padding: 0;
 }
 
-fieldset {
+fieldset, form {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -59,4 +59,12 @@ body {
 .card {
   border-radius: 0.5rem;
   background-color: white;
+}
+
+dialog {
+  width: 80vw;
+}
+
+dialog::backdrop {
+  background: rgb(0 0 0 / 25%);
 }

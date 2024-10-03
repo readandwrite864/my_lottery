@@ -1,4 +1,11 @@
-import { addOrder, getNumberToOrderMap, parseNumbers } from "./orders.js";
+import {
+  addOrder,
+  getNumberToOrderMap,
+  getOrderById,
+  parseNumbers,
+  removeAllOrders,
+  removeOrder,
+} from "./orders.js";
 import { getPrices, setPrices } from "./price.js";
 import { downloadFile, screenshot } from "./screenshot.js";
 
@@ -45,7 +52,21 @@ function createTable(rows, cols) {
         const button = e.target;
         const orderId = Number(button.dataset.orderId);
         if (!orderId) return;
-        debugger;
+        const order = getOrderById(orderId);
+
+        const form = document.getElementById("numberDialogForm");
+        form.elements["user"].value = order.user;
+        form.elements["numbers"].value = order.numbers.join(", ");
+
+        const orderDelete = document.getElementById("numberDialogDelete");
+        orderDelete.onclick = (e) => {
+          if (!confirm("Delete order?")) return;
+          removeOrder(order);
+          updateTable();
+        };
+
+        const dialog = document.getElementById("numberDialog");
+        dialog.showModal();
       };
 
       col.appendChild(button);
@@ -64,7 +85,6 @@ function onSubmit(e) {
   const both_sides = form.elements["both_sides"];
   const order = { numbers: parseNumbers(numbers.value), user: user.value };
 
-
   if (!confirm("Add Order?")) return;
 
   addOrder(order, both_sides.checked);
@@ -79,6 +99,9 @@ function updateTable() {
   table.id = "table";
   document.getElementById("table")?.remove();
   document.body.prepend(table);
+  const stats = document.getElementById("cardStats");
+  const tickedCount = Object.keys(getNumberToOrderMap()).length;
+  stats.textContent = `(${tickedCount} numbers)`;
 }
 
 function initForm() {
@@ -96,6 +119,12 @@ function initForm() {
   document.getElementById("screenshot").onclick = async (e) => {
     const s = await screenshot("table");
     downloadFile(s, "my_lottery.png");
+  };
+
+  document.getElementById("removeAll").onclick = async (e) => {
+    if (!confirm("Remove all orders from this card?")) return;
+    removeAllOrders();
+    updateTable();
   };
 
   const prices = getPrices();
@@ -119,6 +148,8 @@ function initForm() {
       updateTable();
     };
   }
+
+  window.order_side = "up";
 }
 
 updateTable();

@@ -17,7 +17,6 @@ export function addOrder(order, both_sides = false) {
         window.order_side = side;
         saveOrders(originalOrders[i]);
       });
-      alert(error);
     }
 
     window.order_side = original_side;
@@ -25,10 +24,18 @@ export function addOrder(order, both_sides = false) {
     const numberToOrderMap = getNumberToOrderMap();
 
     const invalid = order.numbers.find((n) => n.length !== 2);
-    if (invalid) throw `Invalid number "${invalid}"!`;
+    if (invalid) {
+      const error = `Invalid number "${invalid}"!`;
+      alert(error);
+      throw error;
+    }
 
     const found = order.numbers.find((n) => numberToOrderMap[n]);
-    if (found) throw `Order for number "${found}" already exists!`;
+    if (found) {
+      const error = `Order for number "${found}" already exists!`;
+      alert(error);
+      throw error;
+    }
 
     const orders = getOrders();
     order.id = nextId(orders);
@@ -45,8 +52,16 @@ export function removeOrder(order) {
   saveOrders(orders);
 }
 
+export function removeAllOrders() {
+  saveOrders([]);
+}
+
 export function getOrders() {
   return JSON.parse(localStorage.getItem(storageKey()) || "[]");
+}
+
+export function getOrderById(id) {
+  return getOrders().find((o) => o.id === id);
 }
 
 export function getNumberToOrderMap() {

@@ -8,7 +8,7 @@
   </head>
   <body>
     <fieldset class="card">
-      <legend>Card</legend>
+      <legend>Card <span id="cardStats"></span></legend>
       <div style="display: flex; gap: 1rem">
         <label class="horizontal">
           <span>UP</span>
@@ -20,6 +20,7 @@
         </label>
       </div>
       <button id="screenshot">Screenshot</button>
+      <button id="removeAll">Remove All Orders</button>
     </fieldset>
 
     <form id="order">
@@ -60,6 +61,29 @@
         <button type="submit">Save Price</button>
       </fieldset>
     </form>
+
+    <dialog id="numberDialog">
+      <h2>Order</h2>
+      <form id="numberDialogForm" method="dialog">
+        <label>
+          <span>Customer</span>
+          <textarea
+            readonly
+            name="user"
+            rows="4"
+            placeholder="Name or Facebook or LINE"
+          ></textarea>
+        </label>
+        <label>
+          <span>Numbers <span id="parsedNumbers"></span></span>
+          <textarea readonly name="numbers" rows="4"></textarea>
+        </label>
+        <div style="display: flex; gap: 1rem">
+          <button style="flex: 1" id="numberDialogDelete">DELETE</button>
+          <button style="flex: 1" type="submit">CANCEL</button>
+        </div>
+      </form>
+    </dialog>
   </body>
   <script src="./html2canvas.min.js" defer></script>
   <script src="index.js" type="module"></script>
