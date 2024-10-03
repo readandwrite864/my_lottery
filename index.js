@@ -74,7 +74,10 @@ function createTable(rows, cols) {
     }
   }
 
-  return table;
+  const wrapper = document.createElement("div");
+  wrapper.appendChild(table);
+
+  return wrapper;
 }
 
 function onSubmit(e) {
