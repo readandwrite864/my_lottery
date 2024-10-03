@@ -7,7 +7,20 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <button id="screenshot">Screenshot</button>
+    <fieldset class="card">
+      <legend>Card</legend>
+      <div style="display: flex; gap: 1rem">
+        <label class="horizontal">
+          <span>UP</span>
+          <input type="radio" name="order_side" value="up" checked />
+        </label>
+        <label class="horizontal">
+          <span>DOWN</span>
+          <input type="radio" name="order_side" value="down" />
+        </label>
+      </div>
+      <button id="screenshot">Screenshot</button>
+    </fieldset>
 
     <form id="order">
       <fieldset class="card">
@@ -24,6 +37,10 @@
         <label>
           <span>Numbers <span id="parsedNumbers"></span></span>
           <textarea required name="numbers" rows="4"></textarea>
+        </label>
+        <label class="horizontal">
+          <span>UP and DOWN</span>
+          <input type="checkbox" name="both_sides" />
         </label>
         <button type="submit">Add Order</button>
       </fieldset>

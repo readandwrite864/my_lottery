@@ -6,9 +6,30 @@ function createTable(rows, cols) {
   const table = document.createElement("table");
   const numberToOrderMap = getNumberToOrderMap();
 
+  const thead = document.createElement("thead");
+  const theadRow1 = document.createElement("tr");
+  const theadRow2 = document.createElement("tr");
+  thead.appendChild(theadRow1);
+  thead.appendChild(theadRow2);
+  table.appendChild(thead);
+
+  const prices = getPrices();
+  const ticket_price = document.createElement("th");
+  ticket_price.colSpan = cols;
+  ticket_price.textContent = `Ticket: ${prices.ticket_price} baht`;
+  theadRow1.appendChild(ticket_price);
+
+  const win_prize = document.createElement("th");
+  win_prize.colSpan = cols;
+  win_prize.textContent = `Win Prize: ${prices.win_prize} baht`;
+  theadRow2.appendChild(win_prize);
+
+  const tbody = document.createElement("tbody");
+  table.appendChild(tbody);
+
   for (let i = 0; i < rows; i++) {
     const row = document.createElement("tr");
-    table.appendChild(row);
+    tbody.appendChild(row);
     for (let j = 0; j < cols; j++) {
       const col = document.createElement("td");
       row.appendChild(col);
@@ -40,18 +61,13 @@ function onSubmit(e) {
   const form = document.getElementById("order");
   const user = form.elements["user"];
   const numbers = form.elements["numbers"];
+  const both_sides = form.elements["both_sides"];
   const order = { numbers: parseNumbers(numbers.value), user: user.value };
-  const numberToOrderMap = getNumberToOrderMap();
 
-  const invalid = order.numbers.find((n) => n.length !== 2);
-  if (invalid) return alert(`Invalid number "${invalid}"!`);
-
-  const found = order.numbers.find((n) => numberToOrderMap[n]);
-  if (found) return alert(`Order for number "${found}" already exists!`);
 
   if (!confirm("Add Order?")) return;
 
-  addOrder(order);
+  addOrder(order, both_sides.checked);
   updateTable();
   user.value = "";
   numbers.value = "";
@@ -95,6 +111,14 @@ function initForm() {
     setPrices(prices);
     updateTable();
   };
+
+  for (const radio of document.querySelectorAll("input[type='radio']")) {
+    if (radio.name !== "order_side") return;
+    radio.onclick = (e) => {
+      window.order_side = radio.value;
+      updateTable();
+    };
+  }
 }
 
 updateTable();
