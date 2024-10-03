@@ -6,6 +6,44 @@
     <title>My Lottery</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
-  <script src="index.js"></script>
+  <body>
+    <button id="screenshot">Screenshot</button>
+
+    <form id="order">
+      <fieldset class="card">
+        <legend>New Order</legend>
+        <label>
+          <span>Customer</span>
+          <textarea
+            required
+            name="user"
+            rows="4"
+            placeholder="Name or Facebook or LINE"
+          ></textarea>
+        </label>
+        <label>
+          <span>Numbers <span id="parsedNumbers"></span></span>
+          <textarea required name="numbers" rows="4"></textarea>
+        </label>
+        <button type="submit">Add Order</button>
+      </fieldset>
+    </form>
+
+    <form id="price">
+      <fieldset class="card">
+        <legend>Price</legend>
+        <label>
+          <span>Ticket Price</span>
+          <input required name="ticket_price" />
+        </label>
+        <label>
+          <span>Win Prize</span>
+          <input required name="win_prize" />
+        </label>
+        <button type="submit">Save Price</button>
+      </fieldset>
+    </form>
+  </body>
+  <script src="./html2canvas.min.js" defer></script>
+  <script src="index.js" type="module"></script>
 </html>
