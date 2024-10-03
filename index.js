@@ -23,12 +23,13 @@ function createTable(rows, cols) {
   const prices = getPrices();
   const ticket_price = document.createElement("th");
   ticket_price.colSpan = cols;
-  ticket_price.textContent = `Ticket: ${prices.ticket_price} baht`;
+  ticket_price.textContent = `เบอร์ละ ${prices.ticket_price} บ.`;
   theadRow1.appendChild(ticket_price);
 
   const win_prize = document.createElement("th");
+  const win_prize_amount = `<span style="color: red;">${prices.win_prize}</span>`
   win_prize.colSpan = cols;
-  win_prize.textContent = `Win Prize: ${prices.win_prize} baht`;
+  win_prize.innerHTML = `ถูกรับ ${win_prize_amount} บ.`;
   theadRow2.appendChild(win_prize);
 
   const tbody = document.createElement("tbody");
