@@ -67,6 +67,7 @@ body {
   gap: 1rem;
   background: whitesmoke;
   font-family: monospace;
+  box-sizing: border-box;
 }
 
 .card {
