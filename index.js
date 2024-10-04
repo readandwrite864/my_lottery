@@ -13,32 +13,51 @@ function createTable(rows, cols) {
   const table = document.createElement("table");
   const numberToOrderMap = getNumberToOrderMap();
 
+  const bg = window.order_side === "up" ? "bg_3.jpg" : "bg_2.jpg";
+  table.style.backgroundImage = `radial-gradient(
+    circle,
+    rgba(251, 244, 250, 0.5) 0%,
+    rgba(205, 228, 255, 0.5) 100%
+  ), url("${bg}")`;
+
   const thead = document.createElement("thead");
   const theadRow1 = document.createElement("tr");
   const theadRow2 = document.createElement("tr");
+  const theadRow3 = document.createElement("tr");
   thead.appendChild(theadRow1);
   thead.appendChild(theadRow2);
+  thead.appendChild(theadRow3);
   table.appendChild(thead);
+
+  const header = document.createElement("th");
+  header.colSpan = cols;
+  header.style.textAlign = "center";
+  header.style.fontSize = "1.5rem";
+  header.textContent =
+    window.order_side === "up"
+      ? "รัฐบาล2ตัวบน 16.ต.ค 67"
+      : "รัฐบาล2ตัวล่าง 16.ต.ค 67";
+  theadRow1.appendChild(header);
 
   const prices = getPrices();
   const ticket_price = document.createElement("th");
   ticket_price.colSpan = cols - 3;
   ticket_price.textContent = `เบอร์ละ ${prices.ticket_price} บ.`;
-  theadRow1.appendChild(ticket_price);
+  theadRow2.appendChild(ticket_price);
 
   const win_prize = document.createElement("th");
   const win_prize_amount = `<span style="color: red;">${prices.win_prize}</span>`;
   win_prize.colSpan = cols - 3;
   win_prize.innerHTML = `ถูกรับ ${win_prize_amount} บ.`;
-  theadRow2.appendChild(win_prize);
+  theadRow3.appendChild(win_prize);
 
   const order_side = document.createElement("th");
   order_side.rowSpan = 2;
   order_side.colSpan = 3;
-  order_side.style.fontSize = "2.5rem";
   order_side.style.textAlign = "center";
+  order_side.style.fontSize = "2.2rem";
   order_side.innerHTML = window.order_side === "up" ? "บน" : "ล่าง";
-  theadRow1.appendChild(order_side);
+  theadRow2.appendChild(order_side);
 
   const tbody = document.createElement("tbody");
   table.appendChild(tbody);
@@ -100,6 +119,7 @@ function onSubmit(e) {
   updateTable();
   user.value = "";
   numbers.value = "";
+  both_sides.checked = false;
   document.getElementById("parsedNumbers").textContent = "";
 }
 

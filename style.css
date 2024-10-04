@@ -9,16 +9,9 @@ table {
   width: 100%;
   height: 80vw;
   text-shadow: 1px 1px 2px pink;
-
-  background-image: radial-gradient(
-      circle,
-      rgba(251, 244, 250, 0.5) 0%,
-      rgba(205, 228, 255, 0.5) 100%
-    ),
-    url("bg_3.jpg");
-
   background-repeat: no-repeat;
   background-size: cover;
+  table-layout: fixed;
 }
 
 table button {
