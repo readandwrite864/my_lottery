@@ -20,67 +20,65 @@ function createTable(rows, cols) {
   const table = document.createElement("table");
   const numberToOrderMap = getNumberToOrderMap();
 
-  const bg = window.order_side === "up" ? "bg_3.jpg" : "bg_2.jpg";
-  table.style.backgroundImage = `radial-gradient(
-    circle,
-    rgba(251, 244, 250, 0.5) 0%,
-    rgba(205, 228, 255, 0.5) 100%
-  ), url("${bg}")`;
-
   const thead = document.createElement("thead");
   const theadRow1 = document.createElement("tr");
   const theadRow2 = document.createElement("tr");
-  const theadRow3 = document.createElement("tr");
   thead.appendChild(theadRow1);
   thead.appendChild(theadRow2);
-  thead.appendChild(theadRow3);
   table.appendChild(thead);
 
-  const event = new Date();
-  if (event.getDate() > 16) {
-    event.setMonth(event.getMonth() + 1);
-    event.setDate(1);
-  } else {
-    event.setDate(16);
-  }
+  // const event = new Date();
+  // if (event.getDate() > 16) {
+  //   event.setMonth(event.getMonth() + 1);
+  //   event.setDate(1);
+  // } else {
+  //   event.setDate(16);
+  // }
 
-  const options = {
-    year: "2-digit",
-    month: "short",
-    day: "numeric",
-  };
+  // const options = {
+  //   year: "2-digit",
+  //   month: "short",
+  //   day: "numeric",
+  // };
 
-  const date = event.toLocaleDateString("th-TH", options);
+  // const date = event.toLocaleDateString("th-TH", options);
+
+  // const header = document.createElement("th");
+  // header.colSpan = cols;
+  // header.style.textAlign = "center";
+  // header.style.fontSize = "1.5rem";
+  // header.textContent =
+  //   window.order_side === "up"
+  //     ? `รัฐบาล2ตัวบน ${date}`
+  //     : `รัฐบาล2ตัวล่าง ${date}`;
 
   const header = document.createElement("th");
-  header.colSpan = cols;
-  header.style.textAlign = "center";
-  header.style.fontSize = "1.5rem";
-  header.textContent =
-    window.order_side === "up"
-      ? `รัฐบาล2ตัวบน ${date}`
-      : `รัฐบาล2ตัวล่าง ${date}`;
+  header.colSpan = cols - 3;
+  header.textContent = `เบอร์ทอง 2 ตัว`;
   theadRow1.appendChild(header);
 
   const prices = getPrices();
   const ticket_price = document.createElement("th");
-  ticket_price.colSpan = cols - 3;
-  ticket_price.textContent = `เบอร์ละ ${prices.ticket_price} บ.`;
-  theadRow2.appendChild(ticket_price);
+  ticket_price.rowSpan = 2;
+  ticket_price.colSpan = 3;
+  ticket_price.innerHTML = `
+    <div class="circle" style="padding: 1rem 0">
+      <div style="font-size: 1.2rem">เบอร์ละ</div>
+      <div class="price">${prices.ticket_price}</div>
+    </div>
+  `;
+  theadRow1.appendChild(ticket_price);
 
   const win_prize = document.createElement("th");
   const win_prize_amount = `<span style="color: red;">${prices.win_prize}</span>`;
+  const win_side = window.order_side === "up" ? `บน` : `ล่าง`;
   win_prize.colSpan = cols - 3;
-  win_prize.innerHTML = `ถูกรับ ${win_prize_amount} บ.`;
-  theadRow3.appendChild(win_prize);
-
-  const order_side = document.createElement("th");
-  order_side.rowSpan = 2;
-  order_side.colSpan = 3;
-  order_side.style.textAlign = "center";
-  order_side.style.fontSize = "2.2rem";
-  order_side.innerHTML = window.order_side === "up" ? "บน" : "ล่าง";
-  theadRow2.appendChild(order_side);
+  win_prize.innerHTML = `
+    <div style="margin-bottom: .5rem">
+      ถูกรับ <span class="price">${win_prize_amount}</span> ${win_side}
+    </div>
+  `;
+  theadRow2.appendChild(win_prize);
 
   const tbody = document.createElement("tbody");
   table.appendChild(tbody);
@@ -111,5 +109,9 @@ function createTable(rows, cols) {
     }
   }
 
-  return table;
+  const wrapper = document.createElement("div");
+  wrapper.id = "table";
+  wrapper.appendChild(table);
+
+  return wrapper;
 }

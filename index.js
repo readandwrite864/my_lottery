@@ -37,7 +37,7 @@ function initForm() {
   document.getElementById("screenshot").onclick = async (e) => {
     try {
       e.target.disabled = true;
-      const s = await screenshot("table");
+      const s = await screenshot("#table");
       downloadFile(s, "my_lottery.png");
     } finally {
       e.target.disabled = false;

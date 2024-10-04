@@ -1,5 +1,5 @@
 export function screenshot(selector) {
-  return html2canvas(document.getElementById(selector), {
+  return html2canvas(document.querySelector(selector), {
     allowTaint: true,
     useCORS: true,
   }).then(function (canvas) {
