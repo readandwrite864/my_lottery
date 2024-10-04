@@ -7,60 +7,94 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <fieldset class="card">
-      <legend>บัตร <span id="cardStats"></span></legend>
-      <div style="display: flex; gap: 1rem">
-        <label class="horizontal">
-          <span>บน</span>
-          <input type="radio" name="order_side" value="up" checked />
-        </label>
-        <label class="horizontal">
-          <span>ล่าง</span>
-          <input type="radio" name="order_side" value="down" />
-        </label>
-      </div>
-      <button id="screenshot">ภาพหน้าจอ</button>
-      <button id="removeAll">ลบคำสั่งซื้อทั้งหมด</button>
-    </fieldset>
-
-    <form id="order">
+    <section id="tab_table">
       <fieldset class="card">
-        <legend>คำสั่งซื้อใหม่</legend>
-        <label>
-          <span>ลูกค้า</span>
-          <textarea
-            required
-            name="user"
-            rows="3"
-            placeholder="ชื่อ หรือ เฟสบุ๊ค หรือ ไลน์ หรือ บัญชี"
-          ></textarea>
-        </label>
-        <label>
-          <span>ตัวเลข <span id="parsedNumbers"></span></span>
-          <textarea required name="numbers" rows="3"></textarea>
-        </label>
-        <label class="horizontal">
-          <span>บน และ ล่าง</span>
-          <input type="checkbox" name="both_sides" />
-        </label>
-        <button type="submit">เพิ่มคำสั่งซื้อ</button>
+        <legend>บัตร <span id="cardStats"></span></legend>
+        <div style="display: flex; gap: 1rem">
+          <label class="horizontal">
+            <span>บน</span>
+            <input type="radio" name="order_side" value="up" checked />
+          </label>
+          <label class="horizontal">
+            <span>ล่าง</span>
+            <input type="radio" name="order_side" value="down" />
+          </label>
+        </div>
+        <button id="screenshot">ภาพหน้าจอ</button>
+        <button id="removeAll">ลบคำสั่งซื้อทั้งหมด</button>
       </fieldset>
-    </form>
+      <form id="order">
+        <fieldset class="card">
+          <legend>คำสั่งซื้อใหม่</legend>
+          <label>
+            <span>ลูกค้า</span>
+            <textarea
+              required
+              name="user"
+              rows="3"
+              placeholder="ชื่อ หรือ เฟสบุ๊ค หรือ ไลน์ หรือ บัญชี"
+            ></textarea>
+          </label>
+          <label>
+            <span>ตัวเลข <span id="parsedNumbers"></span></span>
+            <textarea required name="numbers" rows="3"></textarea>
+          </label>
+          <label class="horizontal">
+            <span>บน และ ล่าง</span>
+            <input type="checkbox" name="both_sides" />
+          </label>
+          <button type="submit">เพิ่มคำสั่งซื้อ</button>
+        </fieldset>
+      </form>
+    </section>
 
-    <form id="price">
+    <section id="tab_orders">
       <fieldset class="card">
-        <legend>ราคา</legend>
+        <legend>บัตร</legend>
+        <div style="display: flex; gap: 1rem">
+          <label class="horizontal">
+            <span>บน</span>
+            <input type="radio" name="search_side" value="up" checked />
+          </label>
+          <label class="horizontal">
+            <span>ล่าง</span>
+            <input type="radio" name="search_side" value="down" />
+          </label>
+        </div>
         <label>
-          <span>เบอร์ละ</span>
-          <input required name="ticket_price" />
+          <span>ค้นหา</span>
+          <input
+            type="text"
+            id="orderSearch"
+            placeholder="ตัวเลข หรือ ลูกค้า"
+          />
         </label>
-        <label>
-          <span>ถูกรับ</span>
-          <input required name="win_prize" />
-        </label>
-        <button type="submit">เปลี่ยนราคา</button>
       </fieldset>
-    </form>
+      <div class="list" id="orders_list"></div>
+    </section>
+
+    <section id="tab_settings">
+      <form id="price">
+        <fieldset class="card">
+          <legend>ราคา</legend>
+          <label>
+            <span>เบอร์ละ</span>
+            <input required name="ticket_price" />
+          </label>
+          <label>
+            <span>ถูกรับ</span>
+            <input required name="win_prize" />
+          </label>
+          <button type="submit">เปลี่ยนราคา</button>
+        </fieldset>
+      </form>
+    </section>
+
+    <nav>
+      <button data-tab="tab_table">บัตร</button>
+      <button data-tab="tab_orders">การสั่งซื้อ</button>
+      <button data-tab="tab_settings">การตั้งค่า</button>
+    </nav>
 
     <dialog id="numberDialog">
       <h2>คำสั่ง</h2>
@@ -82,4 +116,5 @@
   </body>
   <script src="./html2canvas.min.js" defer></script>
   <script src="index.js" type="module"></script>
+  <script src="tabs.js" type="module"></script>
 </html>

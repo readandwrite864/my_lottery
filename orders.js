@@ -88,3 +88,63 @@ function storageKey() {
 export function parseNumbers(numbers) {
   return numbers.match(new RegExp("\\d+", "gm")) || [];
 }
+
+window.updateOrdersList = updateOrdersList;
+export function updateOrdersList() {
+  const ordersList = document.getElementById("orders_list");
+  const ordersSearch = document.getElementById("orderSearch");
+  ordersSearch.oninput = filterList;
+  filterList();
+
+  for (const radio of document.querySelectorAll("input[type='radio']")) {
+    if (!radio.name.match("search_side")) continue;
+    radio.removeEventListener("click", filterList);
+    radio.addEventListener("click", filterList);
+  }
+}
+
+function filterList() {
+  const ordersList = document.getElementById("orders_list");
+  const ordersSearch = document.getElementById("orderSearch");
+
+  const orders = getOrders();
+  const ordersFilter = (o) => {
+    const str = ordersSearch.value?.trim() || "";
+    return o.user.match(str) || o.numbers.find((n) => n.match(str));
+  };
+
+  const filteredOrders = orders.filter(ordersFilter);
+  ordersList.innerHTML = filteredOrders.length
+    ? ""
+    : "ไม่มีคำสั่งซื้อที่ตรงกับการค้นหาของคุณบนการ์ดนี้";
+
+  for (const order of filteredOrders) {
+    const orderEl = document.createElement("div");
+    orderEl.className = "item";
+    orderEl.innerHTML = `
+    <div class="user"><b>${order.user}</b></div>
+    <div class="numbers">${order.numbers.join(", ")}</div>
+  `;
+    orderEl.onclick = (e) => {
+      showOrderDialog(order);
+    };
+    ordersList.appendChild(orderEl);
+  }
+}
+
+export function showOrderDialog(order) {
+  const form = document.getElementById("numberDialogForm");
+  form.elements["user"].value = order.user;
+  form.elements["numbers"].value = order.numbers.join(", ");
+
+  const orderDelete = document.getElementById("numberDialogDelete");
+  orderDelete.onclick = (e) => {
+    if (!confirm("Delete order?")) return;
+    removeOrder(order);
+    window.updateTable();
+    window.updateOrdersList();
+  };
+
+  const dialog = document.getElementById("numberDialog");
+  dialog.showModal();
+}

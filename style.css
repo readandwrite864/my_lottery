@@ -12,6 +12,7 @@ table {
   background-repeat: no-repeat;
   background-size: cover;
   table-layout: fixed;
+  margin-bottom: 0;
 }
 
 table button {
@@ -23,6 +24,7 @@ table button {
   text-align: center;
   padding: 0;
   border-radius: 0.25rem;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 fieldset,
@@ -56,14 +58,20 @@ input {
   height: 2rem;
 }
 
-body {
+section {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding: 0.5rem;
+}
+
+body {
   background: whitesmoke;
   font-family: monospace;
   box-sizing: border-box;
   margin: 0;
+  padding-bottom: 5rem;
+  overflow-y: scroll;
 }
 
 input[type="text"],
@@ -85,4 +93,37 @@ dialog {
 
 dialog::backdrop {
   background: rgb(0 0 0 / 25%);
+}
+
+nav {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: grey;
+  border-top: 1px solid grey;
+}
+
+nav > button {
+  flex: 1 1 0;
+  min-width: 0;
+  font-size: 1rem;
+}
+
+nav > button.active {
+  font-size: 1.05rem;
+  font-weight: bold;
+}
+
+.list {
+  border-bottom: 1px solid grey;
+}
+.item {
+  border: 1px solid grey;
+  border-bottom: none;
+  padding: 0.5rem;
+}
+.item .user {
+  flex: 1;
 }
