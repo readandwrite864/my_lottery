@@ -35,8 +35,13 @@ function initForm() {
   }
 
   document.getElementById("screenshot").onclick = async (e) => {
-    const s = await screenshot("table");
-    downloadFile(s, "my_lottery.png");
+    try {
+      e.target.disabled = true;
+      const s = await screenshot("table");
+      downloadFile(s, "my_lottery.png");
+    } finally {
+      e.target.disabled = false;
+    }
   };
 
   document.getElementById("removeAll").onclick = async (e) => {
