@@ -8,79 +8,74 @@
   </head>
   <body>
     <fieldset class="card">
-      <legend>Card <span id="cardStats"></span></legend>
+      <legend>บัตร <span id="cardStats"></span></legend>
       <div style="display: flex; gap: 1rem">
         <label class="horizontal">
-          <span>UP</span>
+          <span>บน</span>
           <input type="radio" name="order_side" value="up" checked />
         </label>
         <label class="horizontal">
-          <span>DOWN</span>
+          <span>ล่าง</span>
           <input type="radio" name="order_side" value="down" />
         </label>
       </div>
-      <button id="screenshot">Screenshot</button>
-      <button id="removeAll">Remove All Orders</button>
+      <button id="screenshot">ภาพหน้าจอ</button>
+      <button id="removeAll">ลบคำสั่งซื้อทั้งหมด</button>
     </fieldset>
 
     <form id="order">
       <fieldset class="card">
-        <legend>New Order</legend>
+        <legend>คำสั่งซื้อใหม่</legend>
         <label>
-          <span>Customer</span>
+          <span>ลูกค้า</span>
           <textarea
             required
             name="user"
-            rows="4"
-            placeholder="Name or Facebook or LINE"
+            rows="3"
+            placeholder="ชื่อ หรือ เฟสบุ๊ค หรือ ไลน์ หรือ บัญชี"
           ></textarea>
         </label>
         <label>
-          <span>Numbers <span id="parsedNumbers"></span></span>
-          <textarea required name="numbers" rows="4"></textarea>
+          <span>ตัวเลข <span id="parsedNumbers"></span></span>
+          <textarea required name="numbers" rows="3"></textarea>
         </label>
         <label class="horizontal">
-          <span>UP and DOWN</span>
+          <span>บน และ ล่าง</span>
           <input type="checkbox" name="both_sides" />
         </label>
-        <button type="submit">Add Order</button>
+        <button type="submit">เพิ่มคำสั่งซื้อ</button>
       </fieldset>
     </form>
 
     <form id="price">
       <fieldset class="card">
-        <legend>Price</legend>
+        <legend>ราคา</legend>
         <label>
-          <span>Ticket Price</span>
+          <span>เบอร์ละ</span>
           <input required name="ticket_price" />
         </label>
         <label>
-          <span>Win Prize</span>
+          <span>ถูกรับ</span>
           <input required name="win_prize" />
         </label>
-        <button type="submit">Save Price</button>
+        <button type="submit">เปลี่ยนราคา</button>
       </fieldset>
     </form>
 
     <dialog id="numberDialog">
-      <h2>Order</h2>
+      <h2>คำสั่ง</h2>
       <form id="numberDialogForm" method="dialog">
         <label>
-          <span>Customer</span>
-          <textarea
-            readonly
-            name="user"
-            rows="4"
-            placeholder="Name or Facebook or LINE"
-          ></textarea>
+          <span>ลูกค้า</span>
+          <textarea readonly name="user" rows="3"></textarea>
         </label>
         <label>
-          <span>Numbers <span id="parsedNumbers"></span></span>
-          <textarea readonly name="numbers" rows="4"></textarea>
+          <span>ตัวเลข <span id="parsedNumbers"></span></span>
+          <textarea readonly name="numbers" rows="3"></textarea>
         </label>
         <div style="display: flex; gap: 1rem">
-          <button style="flex: 1" id="numberDialogDelete">DELETE</button>
-          <button style="flex: 1" type="submit">CANCEL</button>
+          <button style="flex: 1" id="numberDialogDelete">ลบ</button>
+          <button style="flex: 1" type="submit">ปิด</button>
         </div>
       </form>
     </dialog>

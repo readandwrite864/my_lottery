@@ -22,15 +22,23 @@ function createTable(rows, cols) {
 
   const prices = getPrices();
   const ticket_price = document.createElement("th");
-  ticket_price.colSpan = cols;
+  ticket_price.colSpan = cols - 3;
   ticket_price.textContent = `เบอร์ละ ${prices.ticket_price} บ.`;
   theadRow1.appendChild(ticket_price);
 
   const win_prize = document.createElement("th");
-  const win_prize_amount = `<span style="color: red;">${prices.win_prize}</span>`
-  win_prize.colSpan = cols;
+  const win_prize_amount = `<span style="color: red;">${prices.win_prize}</span>`;
+  win_prize.colSpan = cols - 3;
   win_prize.innerHTML = `ถูกรับ ${win_prize_amount} บ.`;
   theadRow2.appendChild(win_prize);
+
+  const order_side = document.createElement("th");
+  order_side.rowSpan = 2;
+  order_side.colSpan = 3;
+  order_side.style.fontSize = "2.5rem";
+  order_side.style.textAlign = "center";
+  order_side.innerHTML = window.order_side === "up" ? "บน" : "ล่าง";
+  theadRow1.appendChild(order_side);
 
   const tbody = document.createElement("tbody");
   table.appendChild(tbody);
@@ -102,7 +110,7 @@ function updateTable() {
   document.body.prepend(table);
   const stats = document.getElementById("cardStats");
   const tickedCount = Object.keys(getNumberToOrderMap()).length;
-  stats.textContent = `(${tickedCount} numbers)`;
+  stats.textContent = `(${tickedCount} ตัวเลข)`;
 }
 
 function initForm() {
@@ -153,5 +161,5 @@ function initForm() {
   window.order_side = "up";
 }
 
-updateTable();
 initForm();
+updateTable();

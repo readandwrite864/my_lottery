@@ -17,4 +17,5 @@ export const downloadFile = (dataUrl, fileName) => {
   link.fileName = fileName;
   link.download = fileName;
   link.click();
+  link.remove();
 };
