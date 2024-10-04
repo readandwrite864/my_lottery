@@ -36,14 +36,30 @@ function createTable(rows, cols) {
   thead.appendChild(theadRow3);
   table.appendChild(thead);
 
+  const event = new Date();
+  if (event.getDate() > 16) {
+    event.setMonth(event.getMonth() + 1);
+    event.setDate(1);
+  } else {
+    event.setDate(16);
+  }
+
+  const options = {
+    year: "2-digit",
+    month: "short",
+    day: "numeric",
+  };
+
+  const date = event.toLocaleDateString("th-TH", options);
+
   const header = document.createElement("th");
   header.colSpan = cols;
   header.style.textAlign = "center";
   header.style.fontSize = "1.5rem";
   header.textContent =
     window.order_side === "up"
-      ? "รัฐบาล2ตัวบน 16.ต.ค 67"
-      : "รัฐบาล2ตัวล่าง 16.ต.ค 67";
+      ? `รัฐบาล2ตัวบน ${date}`
+      : `รัฐบาล2ตัวล่าง ${date}`;
   theadRow1.appendChild(header);
 
   const prices = getPrices();
