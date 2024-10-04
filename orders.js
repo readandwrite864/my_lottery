@@ -109,8 +109,10 @@ function filterList() {
 
   const orders = getOrders();
   const ordersFilter = (o) => {
-    const str = ordersSearch.value?.trim() || "";
-    return o.user.match(str) || o.numbers.find((n) => n.match(str));
+    const str = (ordersSearch.value?.trim() || "").toLowerCase();
+    return (
+      o.user.toLowerCase().match(str) || o.numbers.find((n) => n.match(str))
+    );
   };
 
   const filteredOrders = orders.filter(ordersFilter);
