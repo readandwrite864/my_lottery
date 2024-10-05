@@ -18,7 +18,6 @@ export function updateTable() {
 
 function createTable(rows, cols) {
   const table = document.createElement("table");
-  const numberToOrderMap = getNumberToOrderMap();
 
   const thead = document.createElement("thead");
   const theadRow1 = document.createElement("tr");
@@ -26,31 +25,6 @@ function createTable(rows, cols) {
   thead.appendChild(theadRow1);
   thead.appendChild(theadRow2);
   table.appendChild(thead);
-
-  // const event = new Date();
-  // if (event.getDate() > 16) {
-  //   event.setMonth(event.getMonth() + 1);
-  //   event.setDate(1);
-  // } else {
-  //   event.setDate(16);
-  // }
-
-  // const options = {
-  //   year: "2-digit",
-  //   month: "short",
-  //   day: "numeric",
-  // };
-
-  // const date = event.toLocaleDateString("th-TH", options);
-
-  // const header = document.createElement("th");
-  // header.colSpan = cols;
-  // header.style.textAlign = "center";
-  // header.style.fontSize = "1.5rem";
-  // header.textContent =
-  //   window.order_side === "up"
-  //     ? `รัฐบาล2ตัวบน ${date}`
-  //     : `รัฐบาล2ตัวล่าง ${date}`;
 
   const header = document.createElement("th");
   header.colSpan = cols - 3;
@@ -83,6 +57,7 @@ function createTable(rows, cols) {
   const tbody = document.createElement("tbody");
   table.appendChild(tbody);
 
+  const numberToOrderMap = getNumberToOrderMap();
   for (let i = 0; i < rows; i++) {
     const row = document.createElement("tr");
     tbody.appendChild(row);
@@ -111,6 +86,7 @@ function createTable(rows, cols) {
 
   const wrapper = document.createElement("div");
   wrapper.id = "table";
+  wrapper.className = window.order_side;
   wrapper.appendChild(table);
 
   return wrapper;

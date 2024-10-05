@@ -1,18 +1,23 @@
 #table {
   padding: 1rem;
-  background: rgb(63, 94, 251);
-  background: linear-gradient(
-    143deg,
+}
+
+#table.up {
+  background-image: radial-gradient(
+    circle 916px at 8.2% 23.5%,
+    rgba(171, 45, 121, 1) 0%,
+    rgba(176, 53, 127, 1) 17%,
+    rgba(221, 131, 2, 0.86) 47.2%,
+    rgba(247, 246, 246, 1) 100.2%,
+    rgba(247, 246, 246, 1) 100.2%
+  );
+}
+
+#table.down {
+  background: radial-gradient(
+    circle,
     rgba(63, 94, 251, 1) 0%,
     rgba(252, 70, 107, 1) 100%
-  );
-
-  background: rgb(131, 58, 180);
-  background: linear-gradient(
-    153deg,
-    rgba(131, 58, 180, 1) 0%,
-    rgba(253, 29, 29, 1) 50%,
-    rgba(252, 176, 69, 1) 100%
   );
 }
 
