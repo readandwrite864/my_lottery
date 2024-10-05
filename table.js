@@ -70,8 +70,7 @@ function createTable(rows, cols) {
       const orderId = numberToOrderMap[numberFormatted];
       button.dataset.orderId = orderId;
       button.textContent = numberFormatted;
-      button.style.background = orderId ? "red" : undefined;
-      button.style.color = orderId ? "white" : undefined;
+      button.className = orderId ? "active": undefined;
       button.onclick = (e) => {
         const button = e.target;
         const orderId = Number(button.dataset.orderId);

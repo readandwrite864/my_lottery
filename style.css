@@ -1,24 +1,24 @@
 #table {
   padding: 1rem;
+  background-size: cover, cover;
 }
 
 #table.up {
-  background-image: radial-gradient(
-    circle 916px at 8.2% 23.5%,
-    rgba(171, 45, 121, 1) 0%,
-    rgba(176, 53, 127, 1) 17%,
-    rgba(221, 131, 2, 0.86) 47.2%,
-    rgba(247, 246, 246, 1) 100.2%,
-    rgba(247, 246, 246, 1) 100.2%
-  );
+  background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.315) 20%,
+      rgba(255, 255, 255, 0) 46%
+    ),
+    url("bg_2.jpg");
 }
 
 #table.down {
-  background: radial-gradient(
-    circle,
-    rgba(63, 94, 251, 1) 0%,
-    rgba(252, 70, 107, 1) 100%
-  );
+  background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.359) 20%,
+      rgba(255, 255, 255, 0) 46%
+    ),
+    url("bg_3.jpg");
 }
 
 thead {
@@ -26,6 +26,7 @@ thead {
   text-align: left;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
+  text-shadow: 0 0 5px red;
 }
 
 tbody {
@@ -59,9 +60,15 @@ table button {
   padding: 0;
   border-radius: 0.25rem;
   border-radius: 50%;
-  background: white;
-  border: 1px solid white;
+  color: black;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(210, 59, 159);
   box-sizing: border-box;
+}
+table button.active {
+  background-color: red;
+  border-color: white;
+  color: white;
 }
 
 fieldset,
@@ -170,13 +177,15 @@ nav > button.active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid #f4a460;
+  border: 2px solid whitesmoke;
+  background: rgba(245, 245, 245, 0.305);
   border-radius: 50%;
 }
 
 .price {
   color: red;
   background: white;
+  text-shadow: none;
   padding: 0 0.25rem;
   border-radius: 0.5rem;
 }
